@@ -1,1 +1,13 @@
 inherit_from: .rubocop_todo.yml
+
+require:
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rspec
+
+Style/Documentation:
+  Exclude:
+    - 'db/migrate/*'
+    - 'app/helpers/application_helper.rb'
+    - 'app/models/application_record.rb'
+    - 'config/application.rb'
