@@ -11,3 +11,4 @@ Style/Documentation:
     - 'app/helpers/application_helper.rb'
     - 'app/models/application_record.rb'
     - 'config/application.rb'
+    - 'spec/**/**/*'
