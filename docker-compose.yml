@@ -1,0 +1,13 @@
+version: '3'
+services:
+  db:
+    image: postgres:9.6
+    volumes:
+      - ./postgres-data:/var/lib/postgresql
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_PASSWORD=mysecretpassword
+      - POSTGRES_USER=sales
+      - POSTGRES_DB=sales_development
+    ports:
+      - "3319:5432"
