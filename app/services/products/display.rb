@@ -1,19 +1,21 @@
 # frozen_string_literal: true
 
 module Products
-  class Display
+  class Display #:nodoc:
+    class <<self
+      # rubocop:disable Rails/Output
+      def display_product(product)
+        if product.is_a? Product
+          puts "|||name: #{product.name}|||price: #{product.price}|||"
+        else
+          puts 'Product not found'
+        end
+      end
 
-    def initialize(product)
-      @product = product
+      def display_sum(products)
+        puts "Total Sum: #{products.map(&:price).inject(:+)}"
+      end
+      # rubocop:enable Rails/Output
     end
-
-    def call
-      return 'Product not found' unless product
-
-      return "|||name: #{product.name}|||price: #{product.price}|||"
-    end
-
-    private
-    attr_reader :product
   end
 end

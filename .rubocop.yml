@@ -12,3 +12,15 @@ Style/Documentation:
     - 'app/models/application_record.rb'
     - 'config/application.rb'
     - 'spec/**/**/*'
+
+RSpec/MultipleExpectations:
+  Max: 6
+
+RSpec/ExampleLength:
+  Max: 10
+
+Metrics/BlockLength:
+  ExcludedMethods: ['describe', context]
+
+RSpec/MessageSpies:
+  EnforcedStyle: receive

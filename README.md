@@ -1,24 +1,14 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+To run the app:
 
-Things you may want to cover:
+- Spin-up the db: 'docker-compose up -d db'
+- Load schema: 'rails db:schema:load'
+- Create test database and load chema for it: 'RAILS_ENV=test rails db:create && rails db:schema:load'
+- Run Rspec to confirm it works: 'rspec'
+- Sed the database: 'rails db:seed'
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Now you can go shopping in rails console:
+- create Products::PointOfSale instance, e.g. 'pos = Products::PointOfSale.new'
+- scan products barcodes with: 'pos.scan_barcode(product.code)'
+- when done shopping, press exit to get the summary: 'pos.press_exit'

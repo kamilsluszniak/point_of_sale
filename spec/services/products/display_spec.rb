@@ -5,26 +5,40 @@ require 'spec_helper'
 module Products
   RSpec.describe Display, type: :model do
     context 'when subject exists' do
-      let(:subject) { described_class.new(product) }
-      let(:response) { subject.call }
-        
-      context 'when product exists' do
-        let(:product) { create(:product) }
+      let(:subject) { described_class }
 
-        # LCD response example:
-        # |||name: cucumber|||price: 2.50|||
-        it 'returns LCD response' do
-          expect(response).to match(
-            /\|{3}name:\s{1}[\w\s]+\|{3}price:\s{1}\d+\.?\d+\|{3}/
-          )
+      describe '#display_product' do
+        let(:response) { subject.display_product(product) }
+
+        context 'when product exists' do
+          let(:product) { create(:product) }
+
+          # LCD response example:
+          # |||name: cucumber|||price: 2.50|||
+          it 'outputs LCD response' do
+            expect { response }.to output(/\|{3}name:\s{1}[\w\s]+\|{3}price:\s{1}\d+\.?\d+\|{3}/)
+              .to_stdout
+          end
+        end
+
+        context 'when product doesn`t exist' do
+          let(:product) { nil }
+
+          it 'outputs error message' do
+            expect { response }.to output(/Product not found/).to_stdout
+          end
         end
       end
 
-      context 'when product doesn`t exist' do
-        let(:product) { nil }
+      describe '#display_sum' do
+        let(:response) { subject.display_sum(products) }
 
-        it 'returns error message' do
-          expect(response).to eq('Product not found')
+        context 'when products exist' do
+          let(:products) { create_list(:product, 3) }
+
+          it 'outputs products price sum' do
+            expect { response }.to output(/Total Sum: 30/).to_stdout
+          end
         end
       end
     end
